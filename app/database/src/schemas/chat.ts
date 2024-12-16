@@ -1,12 +1,17 @@
 import { sql } from "drizzle-orm";
 import { pgTable, uuid, text } from "drizzle-orm/pg-core";
+import user from "./user";
 
 const chat = pgTable("chat", {
   id: uuid("id")
     .default(sql`gen_random_uuid()`)
     .primaryKey(),
-  userIdOne: text("user-id-one").notNull(), // Corregí los nombres de columnas si es necesario
-  userIdTwo: text("user-id-two").notNull(),
+  userIdOne: uuid("user-id-one")
+    .references(() => user.id)
+    .notNull(),
+  userIdTwo: uuid("user-id-two")
+    .references(() => user.id)
+    .notNull(),
 });
 
 export default chat;
