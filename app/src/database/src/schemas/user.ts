@@ -11,6 +11,7 @@ const user = pgTable("user", {
   lastname: text("lastname").notNull(),
   password: text("password").notNull(),
   roleId: integer("role-id")
+    .default(1)
     .references(() => role.id)
     .notNull(),
   createdAt: timestamp("created-at", {

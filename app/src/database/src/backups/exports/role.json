@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "type": "User"
+  },
+  {
+    "id": 2,
+    "type": "Barista"
+  },
+  {
+    "id": 3,
+    "type": "SuperAdmin"
+  }
+]

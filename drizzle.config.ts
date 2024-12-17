@@ -5,9 +5,9 @@ dotenv.config();
 
 export default defineConfig({
   // Apunta al directorio donde están tus esquemas, no al archivo `index.ts`
-  schema: "./app/database/src/schemas",  // Cambia a la carpeta de esquemas
+  schema: "./app/src/database/src/schemas",  // Cambia a la carpeta de esquemas
     //! borrar db
-  // schema: "./app/database/src/schema.delete.ts",
+  // schema: "./app/src/database/src/schema.delete.ts",
 
   dialect: "postgresql",  // Dialecto para PostgreSQL
   dbCredentials: {

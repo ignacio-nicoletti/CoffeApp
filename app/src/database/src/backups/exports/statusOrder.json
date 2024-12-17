@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "type": "Pendiente"
+  },
+  {
+    "id": 2,
+    "type": "En preparacion"
+  },
+  {
+    "id": 3,
+    "type": "Listo para retirar"
+  },
+  {
+    "id": 4,
+    "type": "Entregado"
+  },
+  {
+    "id": 5,
+    "type": "Cancelado"
+  }
+]
