@@ -1,3 +1,4 @@
+import react from "react"
 import LoginView from "./src/views/loginView";
 import BgCaffe from "./src/assets/coffeBG.png";
 import logoDelSud from "./src/assets/delSudFooter.png";

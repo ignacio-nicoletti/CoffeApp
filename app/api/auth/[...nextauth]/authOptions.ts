@@ -1,7 +1,7 @@
 import { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db, { eq, user } from "../../../src/database/src";
-import { compare } from "../../../src/utils/encrypt";  // Asegúrate de que la función 'compare' sea correcta
+import { compare } from "../../../src/utils/encrypt"; // Asegúrate de que la función 'compare' sea correcta
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -52,21 +52,17 @@ export const authOptions: NextAuthOptions = {
         token.lastname = user.lastname;
         token.email = user.email;
         token.role = user.roleId; // Incluyendo el rol
-        token.organization = user.organizationId;
-        token.image_profile = user.imageProfile;
       }
       return token;
     },
 
     // Callback para agregar el JWT al objeto session
-    session({ session, token }: { session: any; token: any }) {
+    session({ session, token }: { session: Session; token: any }) {
       session.user.id = token.id;
       session.user.name = token.name;
       session.user.lastname = token.lastname;
       session.user.email = token.email;
       session.user.role = token.role;
-      session.user.organization = token.organization;
-      session.user.image_profile = token.image_profile;
       return session;
     },
   },
