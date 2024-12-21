@@ -1,11 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import LoginForm from "../../components/login/login";
 
 const LoginView = () => {
-  return (
-    <section>
-      <LoginForm />
-    </section>
-  );
+  const [loggin, setlogging] = useState<boolean>(true);
+
+  return <section>{loggin ? <LoginForm /> : ""}</section>;
 };
 
 export default LoginView;

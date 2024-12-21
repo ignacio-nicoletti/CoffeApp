@@ -1,79 +1,50 @@
-"use client"
+"use client";
+// imagenes
+import trustLogo from "@assets/logoTrustFund.svg";
+import logoMobile from "@assets/logo.svg";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import { loginFormController } from "./login.controller/login.controller";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import InputPassword from "../inputs/inputPassword";
+import { Button } from "../ui/button";
+import Modal from "../modal";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
-import { toast } from "../../../../hooks/use-toast"
-import { Button } from "../ui/button"
-import { registerController } from "./login.controller/login.controller"
 
-export default function AuthForm() {
-  const router = useRouter()
-  const [isRegister, setIsRegister] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-
-  const { form, onSubmit } = registerController(isRegister, setIsLoading, router)
+function LoginForm() {
+  const { emailValue, setEmailValue, error, setError, form, onSubmit, handleClickForgotPassword } =
+    loginFormController();
 
   return (
-    <div className="mx-auto max-w-sm space-y-6">
-      <div className="space-y-2 text-center">
-        <h1 className="text-3xl font-bold">{isRegister ? "Regístrate" : "Iniciar Sesión"}</h1>
-        <p className="text-gray-500 dark:text-gray-400">
-          {isRegister
-            ? "Crea una cuenta para empezar a usar nuestros servicios"
-            : "Ingresa tus credenciales para acceder a tu cuenta"}
-        </p>
-      </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Correo Electrónico</FormLabel>
-                <FormControl>
-                  <Input placeholder="tu@ejemplo.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Contraseña</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {isRegister && (
-            <>
+    <section className="w-full h-screen flex p-0 m-0">
+      <div className=" flex justify-center items-center p-4 md:w-full w-3/4 mx-auto mt-16 md:m-auto">
+        <div className="w-full  flex flex-col gap-6">
+          <h1 className="text-4xl font-bold leading-10 tracking-tighter ">Iniciar sesión</h1>
+          <p className="text-base text-slate-500 font-medium">
+            Ingresa tus credenciales para acceder a tu cuenta.
+          </p>
+
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="flex flex-col gap-6 items-center  text-center w-full  "
+            >
               <FormField
                 control={form.control}
-                name="name"
+                name="email"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nombre</FormLabel>
+                  <FormItem className="w-full">
+                    <Label className="text-start flex w-full" htmlFor="email">
+                      Correo electrónico
+                    </Label>
                     <FormControl>
-                      <Input placeholder="Tu nombre" {...field} />
+                      <Input
+                        placeholder="Ingresá tu correo electrónico"
+                        id="email"
+                        className="border border-primary/30"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -81,40 +52,58 @@ export default function AuthForm() {
               />
               <FormField
                 control={form.control}
-                name="lastname"
+                name="password"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Apellido</FormLabel>
+                  <FormItem className="w-full">
+                    <Label htmlFor="password" className="text-start flex w-full text-foreground">
+                      Contraseña
+                    </Label>
                     <FormControl>
-                      <Input placeholder="Tu apellido" {...field} />
+                      {/* Pasarle al InputPassword valores de react-form */}
+                      <InputPassword
+                        id="password"
+                        // icons={{ Eye, eyeSlash }}
+                        value={field.value}
+                        onChange={field.onChange}
+                        required
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            </>
-          )}
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading
-              ? isRegister
-                ? "Registrando..."
-                : "Iniciando sesión..."
-              : isRegister
-              ? "Registrarse"
-              : "Iniciar Sesión"}
-          </Button>
-        </form>
-      </Form>
-      <div className="text-center text-sm">
-        <button
-          onClick={() => setIsRegister(!isRegister)}
-          className="text-blue-500 hover:underline"
-        >
-          {isRegister
-            ? "¿Ya tienes una cuenta? Inicia sesión"
-            : "¿No tienes una cuenta? Regístrate"}
-        </button>
+              <Modal
+                  isOTP={false}
+                  showModalText="¿Olvidaste tu contraseña?"
+                  showModalStyles="h-min bg-transparent p-0 text-base font-medium duration-100 hover:cursor-pointer text-foreground"
+                  title="Recupera tu contraseña"
+                  text="Ingresá tu correo electrónico y recibirás un código para recuperar tu contraseña."
+                  btnConfirmText="Enviar"
+                  btnRejectText="Cancelar"
+                  btnRejectStyles=""
+                  btnConfirmStyles="bg-primary duration-100 hover:text-muted-foreground border-none outline-none"
+                  onSubmit={handleClickForgotPassword}
+                >
+                  {/* <EmailForgotPassReqForm
+                    emailValue={emailValue}
+                    setEmailValue={setEmailValue}
+                    error={error}
+                    setError={setError}
+                  /> */}
+                </Modal>
+              <Button
+                type="submit"
+                className="w-full  duration-100 hover:bg-primary/80 hover:text-white border-none"
+                disabled={!form.formState.isValid}
+              >
+                Ingresar
+              </Button>
+            </form>
+          </Form>
+        </div>
       </div>
-    </div>
-  )
+    </section>
+  );
 }
+
+export default LoginForm;

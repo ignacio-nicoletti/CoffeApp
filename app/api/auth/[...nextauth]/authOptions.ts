@@ -52,12 +52,13 @@ export const authOptions: NextAuthOptions = {
         token.lastname = user.lastname;
         token.email = user.email;
         token.role = user.roleId; // Incluyendo el rol
+        
       }
       return token;
     },
 
     // Callback para agregar el JWT al objeto session
-    session({ session, token }: { session: Session; token: any }) {
+    session({ session, token }: { session: any; token: any }) {
       session.user.id = token.id;
       session.user.name = token.name;
       session.user.lastname = token.lastname;
