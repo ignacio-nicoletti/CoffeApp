@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react"; // Import useState and useEffect
 import { ChevronsUpDown, type LucideIcon } from "lucide-react";
 
 import {
@@ -24,7 +25,7 @@ type NavItem = {
   url: string;
   icon?: LucideIcon;
   isActive?: boolean;
-  items?: SubItem[]; // If present, renders as a dropdown with sub-items
+  items?: SubItem[]; 
 };
 
 type NavMainProps = {
@@ -32,6 +33,23 @@ type NavMainProps = {
 };
 
 export function NavMain({ items }: NavMainProps) {
+  const [cartCount, setCartCount] = useState(0); // State for cart item count
+
+  useEffect(() => {
+    // Function to calculate the cart count
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]"); // Get cart from localStorage
+      setCartCount(cart.length); // Update state with the number of items in the cart
+    };
+
+    updateCartCount(); // Initial load
+    window.addEventListener("storage", updateCartCount); // Listen for changes to localStorage
+
+    return () => {
+      window.removeEventListener("storage", updateCartCount); // Cleanup listener
+    };
+  }, []);
+
   // If items are provided, use them; otherwise, fallback to empty array
   const filteredItems = items || [];
 
@@ -76,7 +94,9 @@ export function NavMain({ items }: NavMainProps) {
                   <SidebarMenuButton tooltip={item.title}>
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
-                    <SidebarMenuBadge className="text-white">24</SidebarMenuBadge>
+                    {item.title === "Carrito" && (
+                      <SidebarMenuBadge className="text-white">{cartCount}</SidebarMenuBadge>
+                    )}
                   </SidebarMenuButton>
                 </Link>
               )}

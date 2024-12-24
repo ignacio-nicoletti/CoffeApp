@@ -1,8 +1,6 @@
 "use client";
-
-import { PlusCircle } from "lucide-react";
-import { Button } from "../../components/ui/button";
 import { product } from "../../database/src";
+import ProductComponent from "../../components/cardProduct";
 
 const DashboardUser = () => {
   const products = [
@@ -22,30 +20,34 @@ const DashboardUser = () => {
       id: 3,
     },
     {
-      name: "Frappe",
+      name: "Frappuchino",
       image: "",
       id: 4,
     },
+    {
+      name: "Te saborizado",
+      image: "",
+      id: 5,
+    },
+    {
+      name: "jugo de naranaja",
+      image: "",
+      id: 6,
+    },
+    {
+      name: "Frappe",
+      image: "",
+      id: 7,
+    },
   ];
-  const onAddToCart = (product: string) => {
-    console.log(product);
-  };
+
   return (
     <div>
+      <h1 className="text-2xl font-bold mb-4">Ordena tu menú</h1>
+
       <div className="flex flex-wrap gap-4 justify-center items-center">
         {products.map((el: any) => (
-          <div className="w-[300px] bg-white shadow-lg rounded-lg overflow-hidden">
-            <div className="relative h-[200px]"></div>
-            <div className="p-4">
-              <h2 className="text-xl font-bold text-gray-800 mb-2">{el?.name}</h2>
-              <Button
-                onClick={() => onAddToCart(el?.id)}
-                className="w-full bg-yellow-700 hover:bg-yellow-800 text-white"
-              >
-                <PlusCircle className="mr-2 h-4 w-4" /> Agregar al carrito
-              </Button>
-            </div>
-          </div>
+          <ProductComponent data={el} key={el.id} />
         ))}
       </div>
     </div>

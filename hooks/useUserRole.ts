@@ -4,17 +4,12 @@ import { useSession } from "next-auth/react";
 
 import {
   Building2,
-  Calculator,
-  CalendarDays,
-  FilePen,
-  LineChart,
   NotebookPen,
-  Receipt,
+
   ShoppingBasket,
   SquarePen,
   TableProperties,
-  UserSearch,
-  Wrench,
+
 } from "lucide-react";
 
 export const useUserRole = () => {
@@ -42,26 +37,26 @@ export const useUserRole = () => {
               icon: TableProperties,
               isActive: false,
             },
-            {
-              title: "Herramientas",
-              url: "#",
-              icon: Wrench,
-              isActive: false,
-              items: [
-                {
-                  title: "Recibos",
-                  url: "/dashboard/crear-recibo",
-                },
-                {
-                  title: "Reservas",
-                  url: "/dashboard/reserva-garantia",
-                },
-                {
-                  title: "Contratos",
-                  url: "https://pdf.trustfund.com.ar/hgc5143f5cg1f3x5df6x6d1c34h56",
-                },
-              ],
-            },
+            // {
+            //   title: "Herramientas",
+            //   url: "#",
+            //   icon: Wrench,
+            //   isActive: false,
+            //   items: [
+            //     {
+            //       title: "Recibos",
+            //       url: "/dashboard/crear-recibo",
+            //     },
+            //     {
+            //       title: "Reservas",
+            //       url: "/dashboard/reserva-garantia",
+            //     },
+            //     {
+            //       title: "Contratos",
+            //       url: "https://pdf.trustfund.com.ar/hgc5143f5cg1f3x5df6x6d1c34h56",
+            //     },
+            //   ],
+            // },
           ],
         };
         setNavItems(navItemsData);

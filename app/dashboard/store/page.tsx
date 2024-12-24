@@ -1,7 +1,9 @@
-export default function Home() {
+import StoreView from "../../src/views/storeView";
+
+export default function Store() {
   return (
-    <main className="w-screen h-screen flex p-0 m-0">
-      <div className=" md:flex md:w-1/2  flex-col justify-center items-center">store</div>
+    <main className="relative flex flex-col w-full bg-[--background] min-h-screen gap-10">
+      <StoreView />
     </main>
   );
 }
