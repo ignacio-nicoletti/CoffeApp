@@ -10,71 +10,36 @@ import {
   LineChart,
   NotebookPen,
   Receipt,
+  ShoppingBasket,
   SquarePen,
+  TableProperties,
   UserSearch,
   Wrench,
 } from "lucide-react";
 
-
-
 export const useUserRole = () => {
   const { data: session } = useSession();
   const [navItems, setNavItems] = useState<any>({});
- 
 
   useEffect(() => {
     if (session) {
       if (session.user.role === 1) {
         const navItemsData = {
-       
           navItemsMain: [
             {
-              title: "Inicio",
+              title: "Ordenar",
               url: "/dashboard/",
-              icon: Building2,
-            },
-            {
-              title: "Mi directorio",
-              url: "#",
               icon: NotebookPen,
-              isActive: false,
-              items: [
-                {
-                  title: "Directorio",
-                  url: "/dashboard/clientes",
-                },
-                {
-                  title: "Cotizador",
-                  url: "/dashboard/cotizador",
-                },
-              ],
             },
             {
-              title: "Mis gestiones",
-              url: "/dashboard/gestiones",
-              icon: SquarePen,
+              title: "Carrito",
+              url: "/dashboard/store",
+              icon: ShoppingBasket,
             },
             {
-              title: "Calendario",
-              url: "/dashboard/calendario",
-              icon: CalendarDays,
-            },
-          ],
-        };
-        setNavItems(navItemsData);
-      } else if (session.user.role === 2) {
-        const navItemsData = {
-        
-          navItemsMain: [
-            {
-              title: "Inicio",
-              url: "/dashboard/",
-              icon: Building2,
-            },
-            {
-              title: "Gestiones",
-              url: "/dashboard/gestiones",
-              icon: SquarePen,
+              title: "Pedidos",
+              url: "/dashboard/pedidos",
+              icon: TableProperties,
               isActive: false,
             },
             {
@@ -97,85 +62,37 @@ export const useUserRole = () => {
                 },
               ],
             },
-            {
-              title: "Calendario",
-              url: "/dashboard/calendario",
-              icon: CalendarDays,
-            },
           ],
         };
         setNavItems(navItemsData);
-      } else if (session.user.role === 3) {
+      } else if (session.user.role === 2) {
         const navItemsData = {
-        
           navItemsMain: [
             {
-              title: "Inicio",
+              title: "Pedidos",
               url: "/dashboard/",
-              icon: Wrench,
+              icon: Building2,
             },
             {
-              title: "Mi directorio",
+              title: "Mercaderia",
               url: "#",
-              icon: SquarePen,
-              isActive: true,
+              icon: NotebookPen,
+              isActive: false,
               items: [
                 {
-                  title: "Directorio",
-                  url: "/dashboard/directorio",
+                  title: "Productos",
+                  url: "/dashboard/items",
                 },
                 {
-                  title: "Cerradas ganadas",
-                  url: "/dashboard/garantias/activas",
-                },
-                {
-                  title: "Cerradas perdidas",
-                  url: "/dashboard/garantias/cerradas",
-                },
-                {
-                  title: "Finalizadas",
-                  url: "/dashboard/garantias/finalizadas",
+                  title: "Menu",
+                  url: "/dashboard/Menu",
                 },
               ],
             },
             {
-              title: "Calendario",
-              url: "/dashboard/calendario",
-              icon: UserSearch,
-            },
-          ],
-          toolsItems: [
-            {
-              title: "Simulador de garantías",
-              url: "/dashboard/simulador-garantia",
-              icon: Calculator,
-            },
-          ],
-          external: [
-            {
-              name: "Recibos",
-              url: "/dashboard/crear-recibo",
-              icon: Receipt,
-            },
-            {
-              name: "Reservas",
-              url: "/dashboard/reserva-garantia",
-              icon: CalendarDays,
-            },
-            {
-              name: "Contratos",
-              url: "https://pdf.trustfund.com.ar/hgc5143f5cg1f3x5df6x6d1c34h56",
-              icon: FilePen,
-            },
-            {
-              name: "Cotización directa",
-              url: "https://pdf.trustfund.com.ar/ergashberthbreterta",
-              icon: LineChart,
-            },
-            {
-              name: "Cotización inmobiliaria",
-              url: "https://pdf.trustfund.com.ar/gserthserthaerghae",
-              icon: Building2,
+              title: "Mis gestiones",
+              url: "/dashboard/",
+              icon: SquarePen,
             },
           ],
         };

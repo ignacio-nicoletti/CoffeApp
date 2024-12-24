@@ -5,6 +5,7 @@ import { ChevronsUpDown, type LucideIcon } from "lucide-react";
 import {
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSubButton,
@@ -34,7 +35,6 @@ export function NavMain({ items }: NavMainProps) {
   // If items are provided, use them; otherwise, fallback to empty array
   const filteredItems = items || [];
 
-
   return (
     <SidebarGroup>
       <SidebarMenu>
@@ -51,6 +51,7 @@ export function NavMain({ items }: NavMainProps) {
                           {item.icon && <item.icon size={16} />}
                           <span>{item.title}</span>
                         </div>
+
                         <ChevronsUpDown className="h-4 w-4" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
@@ -75,6 +76,7 @@ export function NavMain({ items }: NavMainProps) {
                   <SidebarMenuButton tooltip={item.title}>
                     {item.icon && <item.icon />}
                     <span>{item.title}</span>
+                    <SidebarMenuBadge className="text-white">24</SidebarMenuBadge>
                   </SidebarMenuButton>
                 </Link>
               )}
