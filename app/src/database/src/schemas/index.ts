@@ -38,6 +38,7 @@ import order from "./order";
 import product from "./product";
 import role from "./role";
 import statusOrder from "./statusOrder";
+import optionMenu from "./optionsMenu";
 
 // Define relations
 export const userRelations = relations(user, ({ many, one }) => ({
@@ -111,7 +112,6 @@ export const userToChatsRelations = relations(userToChats, ({ one }) => ({
   }),
 }));
 
-
 export const orderRelations = relations(order, ({ one }) => ({
   user: one(user, {
     fields: [order.userId],
@@ -138,4 +138,6 @@ export {
   userToOrders,
   userToMessages,
   userToChats,
+  optionMenu,
+  statusOrder,
 };

@@ -13,7 +13,9 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:seed": "tsx app/src/database/src/scripts/seed.ts",
-    "db:res:hard": "drizzle-kit reset"
+    "db:res:hard": "drizzle-kit reset",
+    "db:backup":  "tsx app/src/database/src/scripts/backup.ts"
+    
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -4,10 +4,11 @@ import __dirname from "../dirname.js";
 import { role } from "../schema.js";
 import statusOrder from "../schemas/statusOrder.js";
 import db from "../index.js";
+import optionMenu from "../schemas/optionsMenu.js";
 // // Importa tus tablas (equivalente a los modelos de Prisma)
 
 type DrizzleModels = {
-  [key in "role" | "statusOrder"]: any; // Aquí puedes usar la tabla directamente
+  [key in "role" | "statusOrder" | "optionMenu"]: any; // Aquí puedes usar la tabla directamente
 };
 
 // // Función para eliminar registros si la tabla no está vacía
@@ -39,6 +40,7 @@ async function eliminarDatos() {
 
     role,
     statusOrder,
+    optionMenu,
   ];
 
   for (const table of tables) {
@@ -52,6 +54,7 @@ async function seedModel(modelName: keyof DrizzleModels, backupDir: string) {
   const model = {
     role,
     statusOrder,
+    optionMenu,
   }[modelName];
 
   if (!model) {
@@ -83,7 +86,7 @@ export default async function seedDatabaseMocks() {
   await eliminarDatos();
 
   // Lista de modelos en el orden adecuado
-  const models: (keyof DrizzleModels)[] = ["role", "statusOrder"];
+  const models: (keyof DrizzleModels)[] = ["role", "statusOrder", "optionMenu"];
 
   // Insertar datos para cada modelo
   for (const model of models) {

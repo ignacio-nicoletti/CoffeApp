@@ -1,7 +1,7 @@
 import { pgTable, serial, text, timestamp, pgEnum } from "drizzle-orm/pg-core";
 
 // Definición del enum para las categorías
-const categoryEnum = pgEnum("category_enum", ["cafe", "te"]);
+export const categoryEnum = pgEnum("category_enum", ["cafe", "te"]);
 
 // Tabla OptionsMenu
 const optionMenu = pgTable("optionMenu", {
