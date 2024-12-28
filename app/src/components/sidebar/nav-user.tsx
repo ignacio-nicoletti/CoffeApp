@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { DropdownMenu } from "../ui/dropdown-menu";
 import { SidebarMenu } from "../ui/sidebar";
+import Logout from "../login/logout";
 
 export function NavUser({
   user,
@@ -89,7 +90,7 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              {/* <Logout size="default" variant="ghost" /> */}
+              <Logout size="default" variant="ghost" />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,4 +1,5 @@
 import seedDatabaseMocks from "./mock";
+import seedDatabase from "./seed-preparations";
 
 async function main() {
   try {
@@ -6,7 +7,7 @@ async function main() {
     await seedDatabaseMocks(); // Ejecuta los mocks con la instancia de Drizzle
 
     // console.log("Subiendo seeders...");
-    // await seedDatabase(); // Ejecuta los seeders con la instancia de Drizzle
+    await seedDatabase(); // Ejecuta los seeders con la instancia de Drizzle
 
     process.exit(0); // Cierra el proceso exitosamente
   } catch (error) {

@@ -2,15 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
-import {
-  Building2,
-  NotebookPen,
-
-  ShoppingBasket,
-  SquarePen,
-  TableProperties,
-
-} from "lucide-react";
+import { Building2, MessageCircle, NotebookPen, ShoppingBasket, TableProperties } from "lucide-react";
 
 export const useUserRole = () => {
   const { data: session } = useSession();
@@ -75,19 +67,19 @@ export const useUserRole = () => {
               isActive: false,
               items: [
                 {
-                  title: "Productos",
-                  url: "/dashboard/items",
-                },
-                {
                   title: "Menu",
                   url: "/dashboard/Menu",
+                },
+                {
+                  title: "Productos",
+                  url: "/dashboard/items",
                 },
               ],
             },
             {
-              title: "Mis gestiones",
-              url: "/dashboard/",
-              icon: SquarePen,
+              title: "Mensajes",
+              url: "/dashboard/messages",
+              icon: MessageCircle,
             },
           ],
         };

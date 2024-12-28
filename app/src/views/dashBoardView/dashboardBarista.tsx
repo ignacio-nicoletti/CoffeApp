@@ -1,30 +1,56 @@
 "use client";
-const DashboardBarista = () => {
+
+import { Button } from "../../components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "../../components/ui/dropdown-menu";
+import { MockData } from "../../server-actions/getMocks";
+
+interface props {
+  mocks: MockData;
+}
+
+const DashboardBarista = ({ mocks }: props) => {
   const products = [
     {
       name: "Capuchino",
-      image: "",
+      variant: "Con leche entera ",
+      quantity: 3,
     },
     {
       name: "Cortado",
-      image: "",
-    },
-    {
-      name: "Te negro",
-      image: "",
-    },
-    {
-      name: "Frappe",
-      image: "",
+      variant: "Con leche descremada",
+      quantity: 2,
     },
   ];
 
   return (
     <div>
-      <div className="flex flex-wrap gap-4 justify-center items-center">
+      <div className="flex flex-col gap-4 justify-center items-center">
         {products.map((el) => (
-          <div className="w-[300px] h-[400px] bg-yellow-700 text-center text-3xl text-white font-bold rounded-lg">
-            <p>{el.name}</p>
+          <div className="flex justify-evenly items-center w-full h-[100px] bg-yellow-700 text-center text-3xl text-white font-bold rounded-lg">
+            <p className="flex-1">{el.name}</p>
+            <p className="flex-1">{el.variant}</p>
+            <p className="flex-1">{el.quantity}</p>
+            <div className="flex-1">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Button>Pendiente</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Estado</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {mocks.statusOrderTypes.map((el) => (
+                    <DropdownMenuItem>{el.type}</DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
         ))}
       </div>
