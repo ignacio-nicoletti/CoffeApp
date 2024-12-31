@@ -1,5 +1,5 @@
 "use client";
-import { product } from "../../database/src";
+
 import ProductComponent from "../../components/cardProduct";
 
 const DashboardUser = () => {

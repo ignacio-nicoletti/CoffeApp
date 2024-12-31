@@ -11,6 +11,16 @@ const StoreView = () => {
     setCartItems(storedCart);
   }, []);
 
+  const handleSubmit = async () => {
+    await fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartItems),
+    });
+  };
+
   return (
     <div className="w-full flex items-center flex-col ">
       <h1 className="text-2xl font-bold mb-4 ">Carrito</h1>
@@ -27,7 +37,13 @@ const StoreView = () => {
               </li>
             ))}
           </ul>
-          <Button>Confirmar Pedido</Button>
+          <Button
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            Confirmar Pedido
+          </Button>
         </div>
       ) : (
         <p className="text-gray-500">Tu carrito está vacío.</p>

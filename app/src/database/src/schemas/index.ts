@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, uuid } from "drizzle-orm/pg-core";
+import { integer, pgTable, uuid } from "drizzle-orm/pg-core";
 
 // First define the junction tables
 const userToOrders = pgTable("user_to_orders", {
@@ -9,6 +9,17 @@ const userToOrders = pgTable("user_to_orders", {
   orderId: uuid("order_id")
     .notNull()
     .references(() => order.id),
+});
+
+const orderToProduct = pgTable("order_to_product", {
+  orderId: uuid("order_id")
+    .notNull()
+    .references(() => order.id),
+  productId: uuid("product_id")
+    .notNull()
+    .references(() => product.id),
+  quantity: integer("quantity").notNull(), // Cantidad de este producto en el pedido
+  price: integer("price").notNull(), // Precio individual del producto
 });
 
 const userToMessages = pgTable("user_to_messages", {
@@ -39,6 +50,7 @@ import product from "./product";
 import role from "./role";
 import statusOrder from "./statusOrder";
 import optionMenu from "./optionsMenu";
+
 
 // Define relations
 export const userRelations = relations(user, ({ many, one }) => ({
@@ -112,7 +124,11 @@ export const userToChatsRelations = relations(userToChats, ({ one }) => ({
   }),
 }));
 
-export const orderRelations = relations(order, ({ one }) => ({
+export const statusOrderRelations = relations(statusOrder, ({ many }) => ({
+  orders: many(order),
+}));
+
+export const orderRelations = relations(order, ({ many, one }) => ({
   user: one(user, {
     fields: [order.userId],
     references: [user.id],
@@ -121,12 +137,19 @@ export const orderRelations = relations(order, ({ one }) => ({
     fields: [order.statusOrderId],
     references: [statusOrder.id],
   }),
+  products: many(orderToProduct), // Relación con los productos en el pedido
 }));
 
-export const statusOrderRelations = relations(statusOrder, ({ many }) => ({
-  orders: many(order),
+export const orderToProductRelations = relations(orderToProduct, ({ one }) => ({
+  order: one(order, {
+    fields: [orderToProduct.orderId],
+    references: [order.id],
+  }),
+  product: one(product, {
+    fields: [orderToProduct.productId],
+    references: [product.id],
+  }),
 }));
-// Export all schemas and relations
 export {
   user,
   chat,
@@ -140,4 +163,5 @@ export {
   userToChats,
   optionMenu,
   statusOrder,
+  orderToProduct
 };

@@ -17,7 +17,6 @@ type SidebarProps = {
 } & React.ComponentProps<typeof Sidebar>;
 
 export function AppSidebar(props: SidebarProps) {
-  const { data: session } = useSession();
   const { navItems } = useUserRole();
 
   return (

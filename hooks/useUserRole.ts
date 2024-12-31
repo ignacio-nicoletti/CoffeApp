@@ -68,7 +68,7 @@ export const useUserRole = () => {
               items: [
                 {
                   title: "Menu",
-                  url: "/dashboard/Menu",
+                  url: "/dashboard/menu",
                 },
                 {
                   title: "Productos",
